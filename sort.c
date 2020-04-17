@@ -44,3 +44,15 @@ void mergesort(double* arr_double, size_t low, size_t high)
         merge(arr_double, low, mid, high);
     }
 }
+void insertionsort(double* arr_double, size_t n)
+{
+    for (size_t i = 1; i < n; i++) {
+        double key = arr_double[i];
+        size_t j = i - 1;
+        while ((j >= 0) && (arr_double[j] > key)) {
+            arr_double[j + 1] = arr_double[j];
+            j--;
+        }
+        arr_double[j + 1] = key;
+    }
+}
