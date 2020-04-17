@@ -1,0 +1,46 @@
+#include <inttypes.h>
+#include <stdio.h>
+#include <stdlib.h>
+void merge(double* arr_double, size_t low, size_t mid, size_t high)
+{
+    double* B;
+    size_t n = 400000;
+    B = calloc(n, sizeof(double));
+    for (size_t i = low; i <= high; i++) {
+        B[i] = arr_double[i];
+    }
+    size_t l, r, i;
+    l = low;
+    r = mid + 1;
+    i = low;
+    while ((l <= mid) & (r <= high)) {
+        if (B[l] <= B[r]) {
+            arr_double[i] = B[l];
+            l = l + 1;
+        } else {
+            arr_double[i] = B[r];
+            r = r + 1;
+        }
+        i = i + 1;
+    }
+    while (l <= mid) {
+        arr_double[i] = B[l];
+        l = l + 1;
+        i = i + 1;
+    }
+    while (r <= high) {
+        arr_double[i] = B[r];
+        r = r + 1;
+        i = i + 1;
+    }
+    free(B);
+}
+void mergesort(double* arr_double, size_t low, size_t high)
+{
+    if (low < high) {
+        size_t mid = (low + (high - low) / 2);
+        mergesort(arr_double, low, mid);
+        mergesort(arr_double, mid + 1, high);
+        merge(arr_double, low, mid, high);
+    }
+}
