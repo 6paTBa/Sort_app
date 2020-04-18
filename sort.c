@@ -56,3 +56,29 @@ void insertionsort(double* arr_double, size_t n)
         arr_double[j + 1] = key;
     }
 }
+void count(uint32_t* arr_uint, size_t n)
+{
+    uint32_t max = 0;
+    for (uint32_t i = 0; i < n; i++) {
+        if (arr_uint[i] > max)
+            max = arr_uint[i];
+    }
+
+    uint32_t* sm;
+    sm = calloc((max + 1), sizeof(uint32_t));
+    for (size_t i = 0; i < n; i++) {
+        sm[arr_uint[i]]++;
+    }
+    size_t j = 0;
+    for (size_t i = 0; i < max + 1; i++) {
+        if (sm[i] > 0) {
+            while (sm[i] > 0) {
+                arr_uint[j] = i;
+                sm[i]--;
+                j++;
+            }
+        }
+    }
+
+    free(sm);
+}
