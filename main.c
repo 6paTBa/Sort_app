@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "functions.h"
+#include "sort.h"
 
 int main(int argc, char* argv[])
 {
@@ -29,11 +30,16 @@ int main(int argc, char* argv[])
         for (size_t i = 0; i < size; i++) {
             fscanf(input, "%d", arr_uint + i);
         }
+        count(arr_uint, size);
     } else {
         double* arr_double = malloc(sizeof(double) * size);
         for (size_t i = 0; i < size; i++) {
             fscanf(input, "%lf", arr_double + i);
         }
+        if (size > 1000)
+            mergesort(arr_double, 0, size - 1);
+        else
+            insertionsort(arr_double, size);
         fclose(input);
         return 0;
     }
