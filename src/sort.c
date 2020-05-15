@@ -68,7 +68,6 @@ void count(uint32_t* arr_uint, size_t n)
         if (arr_uint[i] > max)
             max = arr_uint[i];
     }
-
     uint32_t* sm;
     sm = calloc((max + 1), sizeof(uint32_t));
     for (size_t i = 0; i < n; i++) {
@@ -84,6 +83,5 @@ void count(uint32_t* arr_uint, size_t n)
             }
         }
     }
-
     free(sm);
 }
