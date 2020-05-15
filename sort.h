@@ -1,5 +1,7 @@
 #ifndef H_SORT
 #define H_SORT
+#include <inttypes.h>
+#include <stddef.h>
 
 void merge(double* arr_double, size_t low, size_t mid, size_t high);
 
