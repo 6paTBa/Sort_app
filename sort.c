@@ -1,6 +1,7 @@
 #include <inttypes.h>
 #include <stdio.h>
 #include <stdlib.h>
+
 void merge(double* arr_double, size_t low, size_t mid, size_t high)
 {
     double* B;
@@ -35,6 +36,7 @@ void merge(double* arr_double, size_t low, size_t mid, size_t high)
     }
     free(B);
 }
+
 void mergesort(double* arr_double, size_t low, size_t high)
 {
     if (low < high) {
@@ -44,6 +46,7 @@ void mergesort(double* arr_double, size_t low, size_t high)
         merge(arr_double, low, mid, high);
     }
 }
+
 void insertionsort(double* arr_double, size_t n)
 {
     for (size_t i = 1; i < n; i++) {
@@ -56,6 +59,7 @@ void insertionsort(double* arr_double, size_t n)
         arr_double[j + 1] = key;
     }
 }
+
 void count(uint32_t* arr_uint, size_t n)
 {
     uint32_t max = 0;
