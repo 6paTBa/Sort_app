@@ -1,8 +1,4 @@
-#include <inttypes.h>
-#include <stdio.h>
-#include <stdlib.h>
 #include "functions.h"
-#include "sort.h"
 
 int main(int argc, char* argv[])
 {
@@ -19,34 +15,12 @@ int main(int argc, char* argv[])
     }
     size_t is_uint = 1;
     size_t size = check_file(input, &is_uint);
-    if (size == 0) {
-        printf("Unable to read data - invalid or empty data\n");
+    if (size < 2) {
+        printf("Unable to sort data - invalid or empty data\n");
         fclose(input);
         return 0;
     }
     rewind(input);
-    size_t i;
-    uint32_t* arr_uint;
-    double* arr_double;
-    if (is_uint == 1) {
-        arr_uint = malloc(sizeof(uint32_t) * size);
-        for (i = 0; i < size; i++) {
-            fscanf(input, "%d", arr_uint + i);
-        }
-        fclose(input);
-        count(arr_uint, size);
-    } else {
-        arr_double = malloc(sizeof(double) * size);
-        for (i = 0; i < size; i++) {
-            fscanf(input, "%lf", arr_double + i);
-        }
-        fclose(input);
-        if (size > 1000) {
-            mergesort(arr_double, 0, size - 1);
-        } else {
-            insertionsort(arr_double, size);
-        }
-    }
     FILE* output;
     if (argc == 3) {
         output = fopen(argv[2], "w");
@@ -54,20 +28,17 @@ int main(int argc, char* argv[])
         output = fopen("sort.txt", "w");
     }
     if (is_uint == 1) {
-        for (i = 0; i < size; i++) {
-            fprintf(output, "%d\n", *(arr_uint + i));
-        }
+        sort_uint(input, output, size);
     } else {
-        for (i = 0; i < size; i++) {
-            fprintf(output, "%g\n", *(arr_double + i));
-        }
+        sort_double(input, output, size);
     }
+    fclose(input);
     fclose(output);
     printf("Data from %s is succesfully sorted and printed in ", argv[1]);
     if (argc == 3) {
         printf("%s\n", argv[2]);
     } else {
-        printf("sort.txt\n"); 
-        }
+        printf("sort.txt\n");
+    }
     return 0;
 }
