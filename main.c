@@ -53,6 +53,15 @@ int main(int argc, char* argv[])
     } else {
         output = fopen("sort.txt", "w");
     }
+    if (is_uint == 1) {
+        for (i = 0; i < size; i++) {
+            fprintf(output, "%d\n", *(arr_uint + i));
+        }
+    } else {
+        for (i = 0; i < size; i++) {
+            fprintf(output, "%g\n", *(arr_double + i));
+        }
+    }
     fclose(output);
     return 0;
 }
