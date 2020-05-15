@@ -1,6 +1,3 @@
-#include <inttypes.h>
-#include <stdio.h>
-#include <stdlib.h>
 #include "functions.h"
 #include "sort.h"
 
@@ -67,7 +64,7 @@ int main(int argc, char* argv[])
     if (argc == 3) {
         printf("%s\n", argv[2]);
     } else {
-        printf("sort.txt\n"); 
-        }
+        printf("sort.txt\n");
+    }
     return 0;
 }
