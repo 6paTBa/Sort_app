@@ -25,22 +25,34 @@ int main(int argc, char* argv[])
         return 0;
     }
     rewind(input);
+    size_t i;
+    uint32_t* arr_uint;
+    double* arr_double;
     if (is_uint == 1) {
-        uint32_t* arr_uint = malloc(sizeof(uint32_t) * size);
-        for (size_t i = 0; i < size; i++) {
+        arr_uint = malloc(sizeof(uint32_t) * size);
+        for (i = 0; i < size; i++) {
             fscanf(input, "%d", arr_uint + i);
         }
+        fclose(input);
         count(arr_uint, size);
     } else {
-        double* arr_double = malloc(sizeof(double) * size);
-        for (size_t i = 0; i < size; i++) {
+        arr_double = malloc(sizeof(double) * size);
+        for (i = 0; i < size; i++) {
             fscanf(input, "%lf", arr_double + i);
         }
-        if (size > 1000)
-            mergesort(arr_double, 0, size - 1);
-        else
-            insertionsort(arr_double, size);
         fclose(input);
-        return 0;
+        if (size > 1000) {
+            mergesort(arr_double, 0, size - 1);
+        } else {
+            insertionsort(arr_double, size);
+        }
     }
+    FILE* output;
+    if (argc == 3) {
+        output = fopen(argv[2], "w");
+    } else {
+        output = fopen("sort.txt", "w");
+    }
+    fclose(output);
+    return 0;
 }
