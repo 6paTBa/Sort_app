@@ -63,5 +63,11 @@ int main(int argc, char* argv[])
         }
     }
     fclose(output);
+    printf("Data from %s is succesfully sorted and printed in ", argv[1]);
+    if (argc == 3) {
+        printf("%s\n", argv[2]);
+    } else {
+        printf("sort.txt\n"); 
+        }
     return 0;
 }
