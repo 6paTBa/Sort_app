@@ -1,5 +1,6 @@
 #include "functions.h"
 #include "sort.h"
+#define MAX_IS_SIZE 1000
 
 int main(int argc, char* argv[])
 {
@@ -38,7 +39,7 @@ int main(int argc, char* argv[])
             fscanf(input, "%lf", arr_double + i);
         }
         fclose(input);
-        if (size > 1000) {
+        if (size > MAX_IS_SIZE) {
             mergesort(arr_double, 0, size - 1);
         } else {
             insertionsort(arr_double, size);
