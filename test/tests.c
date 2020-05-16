@@ -126,3 +126,48 @@ CTEST(check_invalid_string, invalid_int)
     size_t result = check_string(string, &is_uint);
     ASSERT_EQUAL(expect, result);
 }
+
+CTEST(check_valid_string, valid_uint)
+{
+    char string[] = "0\n";
+    size_t is_uint = 1;
+    size_t expect = 1;
+    size_t result = check_string(string, &is_uint);
+    ASSERT_EQUAL(expect, result);
+}
+
+CTEST(check_valid_string, valid_uint_2)
+{
+    char string[] = "1000\n";
+    size_t is_uint = 1;
+    size_t expect = 1;
+    size_t result = check_string(string, &is_uint);
+    ASSERT_EQUAL(expect, result);
+}
+
+CTEST(check_valid_string, valid_double)
+{
+    char string[] = "-10\n";
+    size_t is_uint = 1;
+    size_t expect = 1;
+    size_t result = check_string(string, &is_uint);
+    ASSERT_EQUAL(expect, result);
+}
+
+CTEST(check_valid_string, valid_double_2)
+{
+    char string[] = "1.05\n";
+    size_t is_uint = 1;
+    size_t expect = 1;
+    size_t result = check_string(string, &is_uint);
+    ASSERT_EQUAL(expect, result);
+}
+
+CTEST(check_valid_string, valid_double_3)
+{
+    char string[] = "-0.05\n";
+    size_t is_uint = 1;
+    size_t expect = 1;
+    size_t result = check_string(string, &is_uint);
+    ASSERT_EQUAL(expect, result);
+}
