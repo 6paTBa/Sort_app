@@ -172,7 +172,6 @@ CTEST(check_valid_string, valid_double_3)
     ASSERT_EQUAL(expect, result);
 }
 
-
 CTEST(check_string, number_type_identify)
 {
     char string[] = "-0.05\n";
