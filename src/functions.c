@@ -6,7 +6,7 @@
 #define MAX_STR_LEN 50
 #define MAX_IS_SIZE 1000
 
-int32_t check_string(char* str, size_t* is_uint)
+size_t check_string(char* str, size_t* is_uint)
 {
     size_t point = 0;
     if (strlen(str) == 1 && str[0] == '\n') {

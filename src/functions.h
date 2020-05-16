@@ -5,7 +5,7 @@
 
 size_t check_file(FILE* input, size_t* is_uint);
 
-int32_t check_string(char* str, size_t* is_uint);
+size_t check_string(char* str, size_t* is_uint);
 
 void sort_uint(FILE* input, FILE* output, size_t size);
 
