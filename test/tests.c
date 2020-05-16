@@ -171,3 +171,40 @@ CTEST(check_valid_string, valid_double_3)
     size_t result = check_string(string, &is_uint);
     ASSERT_EQUAL(expect, result);
 }
+
+
+CTEST(check_string, number_type_identify)
+{
+    char string[] = "-0.05\n";
+    size_t result = 1;
+    size_t expect = 0;
+    check_string(string, &result);
+    ASSERT_EQUAL(expect, result);
+}
+
+CTEST(check_string, number_type_identify_2)
+{
+    char string[] = "0.05\n";
+    size_t result = 1;
+    size_t expect = 0;
+    check_string(string, &result);
+    ASSERT_EQUAL(expect, result);
+}
+
+CTEST(check_string, number_type_identify_3)
+{
+    char string[] = "-50\n";
+    size_t result = 1;
+    size_t expect = 0;
+    check_string(string, &result);
+    ASSERT_EQUAL(expect, result);
+}
+
+CTEST(check_string, number_type_identify_4)
+{
+    char string[] = "50\n";
+    size_t result = 1;
+    size_t expect = 1;
+    check_string(string, &result);
+    ASSERT_EQUAL(expect, result);
+}
