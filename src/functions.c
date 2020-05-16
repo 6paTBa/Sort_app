@@ -6,23 +6,38 @@
 #define MAX_STR_LEN 50
 #define MAX_IS_SIZE 1000
 
-int32_t check_string(char* str, size_t* is_uint)
+size_t check_string(char* str, size_t* is_uint)
 {
     size_t point = 0;
     if (strlen(str) == 1 && str[0] == '\n') {
         return 0;
     }
     for (size_t i = 0; str[i] != '\n'; i++) {
-        if (i == 0 && str[i] == '-') {
+        if ((i == 0) && (str[i] == '-')) {
             *is_uint = 0;
-        } else if (i != 0 && str[i] == '.' && point == 0) {
-            if (str[i - 1] == '-') {
+        } else if ((i != 0) && (str[i] == '.') && (point == 0)) {
+            if ((str[i - 1] == '-') || (str[i + 1] == '\n')) {
                 return 0;
             }
             point = 1;
             *is_uint = 0;
         } else if (!isdigit(str[i])) {
             return 0;
+        }
+        if (str[i] == '0') {
+            if (i == 0) {
+                if ((str[i + 1] != '.') && (str[i + 1] != '\n')) {
+                    return 0;
+                }
+            } else if ((str[i - 1] == '-') && (str[i + 1] != '.')) {
+                return 0;
+            } else if (str[i + 1] == '.') {
+                for (size_t j = 2; str[i + j] == '0'; j++) {
+                    if (str[i + j + 1] == '\n') {
+                        return 0;
+                    }
+                }
+            }
         }
     }
     return 1;
