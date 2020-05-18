@@ -10,7 +10,6 @@ int main(int argc, char* argv[])
     input = fopen(argv[1], "r");
     if (input == NULL) {
         printf("Unable to read data - file not found\n");
-        fclose(input);
         return 0;
     }
     size_t is_uint = 1;
