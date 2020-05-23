@@ -59,7 +59,7 @@ size_t check_file(FILE* input, size_t* is_uint)
 void sort_uint(FILE* input, FILE* output, size_t size)
 {
     size_t i;
-    uint32_t* arr_uint = malloc(sizeof(uint32_t) * size);
+    uint32_t* arr_uint = calloc(size, sizeof(uint32_t));
     for (i = 0; i < size; i++) {
         fscanf(input, "%d", arr_uint + i);
     }
@@ -67,12 +67,13 @@ void sort_uint(FILE* input, FILE* output, size_t size)
     for (i = 0; i < size; i++) {
         fprintf(output, "%d\n", *(arr_uint + i));
     }
+    free(arr_uint);
 }
 
 void sort_double(FILE* input, FILE* output, size_t size)
 {
     size_t i;
-    double* arr_double = malloc(sizeof(double) * size);
+    double* arr_double = calloc(size, sizeof(double));
     for (i = 0; i < size; i++) {
         fscanf(input, "%lf", arr_double + i);
     }
@@ -84,4 +85,5 @@ void sort_double(FILE* input, FILE* output, size_t size)
     for (i = 0; i < size; i++) {
         fprintf(output, "%g\n", *(arr_double + i));
     }
+    free(arr_double);
 }
