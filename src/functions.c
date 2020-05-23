@@ -67,6 +67,7 @@ void sort_uint(FILE* input, FILE* output, size_t size)
     for (i = 0; i < size; i++) {
         fprintf(output, "%d\n", *(arr_uint + i));
     }
+    free(arr_uint);
 }
 
 void sort_double(FILE* input, FILE* output, size_t size)
@@ -84,4 +85,5 @@ void sort_double(FILE* input, FILE* output, size_t size)
     for (i = 0; i < size; i++) {
         fprintf(output, "%g\n", *(arr_double + i));
     }
+    free(arr_double);
 }
