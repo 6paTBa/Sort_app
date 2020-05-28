@@ -38,17 +38,17 @@ void merge(double* arr_double, size_t low, size_t mid, size_t high)
     free(b);
 }
 
-void mergesort(double* arr_double, size_t low, size_t high)
+void merge_sort(double* arr_double, size_t low, size_t high)
 {
     if (low < high) {
         size_t mid = (low + (high - low) / 2);
-        mergesort(arr_double, low, mid);
-        mergesort(arr_double, mid + 1, high);
+        merge_sort(arr_double, low, mid);
+        merge_sort(arr_double, mid + 1, high);
         merge(arr_double, low, mid, high);
     }
 }
 
-void insertionsort(double* arr_double, size_t n)
+void insertion_sort(double* arr_double, size_t n)
 {
     for (size_t i = 1; i < n; i++) {
         double key = arr_double[i];
@@ -61,7 +61,7 @@ void insertionsort(double* arr_double, size_t n)
     }
 }
 
-void count(uint32_t* arr_uint, size_t n)
+void counting_sort(uint32_t* arr_uint, size_t n)
 {
     uint32_t max = 0;
     for (uint32_t i = 0; i < n; i++) {
