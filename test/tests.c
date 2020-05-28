@@ -1,5 +1,16 @@
 #include "functions.h"
+#include "sort.h"
 #include <ctest.h>
+
+size_t check_sort_uint(uint32_t* arr, size_t n)
+{
+    for (size_t i = 0; i < n - 1; i++) {
+        if (arr[i + 1] < arr[i]) {
+            return 0;
+        }
+    }
+    return 1;
+}
 
 CTEST(check_invalid_string, invalid_minus)
 {
@@ -205,5 +216,32 @@ CTEST(check_string, number_type_identify_4)
     size_t result = 1;
     size_t expect = 1;
     check_string(string, &result);
+    ASSERT_EQUAL(expect, result);
+}
+
+CTEST(counting_sort, decreasing_array)
+{
+    uint32_t mass[10] = {10, 9, 8, 7, 6, 5, 4, 3, 2, 1};
+    counting_sort(mass, 10);
+    size_t result = check_sort_uint(mass, 10);
+    size_t expect = 1;
+    ASSERT_EQUAL(expect, result);
+}
+
+CTEST(counting_sort, flat_array)
+{
+    uint32_t mass[10] = {1, 1, 1, 1, 1, 1, 1, 1, 1, 1};
+    counting_sort(mass, 10);
+    size_t result = check_sort_uint(mass, 10);
+    size_t expect = 1;
+    ASSERT_EQUAL(expect, result);
+}
+
+CTEST(counting_sort, sorted_array)
+{
+    uint32_t mass[10] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+    counting_sort(mass, 10);
+    size_t result = check_sort_uint(mass, 10);
+    size_t expect = 1;
     ASSERT_EQUAL(expect, result);
 }
