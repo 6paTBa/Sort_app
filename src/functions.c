@@ -63,7 +63,7 @@ void sort_uint(FILE* input, FILE* output, size_t size)
     for (i = 0; i < size; i++) {
         fscanf(input, "%d", arr_uint + i);
     }
-    count(arr_uint, size);
+    counting_sort(arr_uint, size);
     for (i = 0; i < size; i++) {
         fprintf(output, "%d\n", *(arr_uint + i));
     }
@@ -78,9 +78,9 @@ void sort_double(FILE* input, FILE* output, size_t size)
         fscanf(input, "%lf", arr_double + i);
     }
     if (size > MAX_IS_SIZE) {
-        mergesort(arr_double, 0, size - 1);
+        merge_sort(arr_double, 0, size - 1);
     } else {
-        insertionsort(arr_double, size);
+        insertion_sort(arr_double, size);
     }
     for (i = 0; i < size; i++) {
         fprintf(output, "%g\n", *(arr_double + i));
