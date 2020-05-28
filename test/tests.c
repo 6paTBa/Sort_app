@@ -282,3 +282,41 @@ CTEST(insertion_sort, sorted_array)
     size_t expect = 1;
     ASSERT_EQUAL(expect, result);
 }
+
+CTEST(merge_sort, decreasing_array)
+{
+    double mass[1100];
+    double j = 1100;
+    for (size_t i = 0; i < 1100; i++) {
+        mass[i] = j;
+        j--;
+    }
+    merge_sort(mass, 0, 1100);
+    size_t result = check_sort_double(mass, 1100);
+    size_t expect = 1;
+    ASSERT_EQUAL(expect, result);
+}
+
+CTEST(merge_sort, flat_array)
+{
+    double mass[1100];
+    for (size_t i = 0; i < 1100; i++) {
+        mass[i] = -1.1;
+    }
+    merge_sort(mass, 0, 1100);
+    size_t result = check_sort_double(mass, 1100);
+    size_t expect = 1;
+    ASSERT_EQUAL(expect, result);
+}
+
+CTEST(merge_sort, sorted_array)
+{
+    double mass[1100];
+    for (size_t i = 0; i < 1100; i++) {
+        mass[i] = i;
+    }
+    merge_sort(mass, 0, 1100);
+    size_t result = check_sort_double(mass, 1100);
+    size_t expect = 1;
+    ASSERT_EQUAL(expect, result);
+}
