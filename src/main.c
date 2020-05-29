@@ -1,21 +1,24 @@
 #include "functions.h"
+#define WRONG_ARGS_CODE 1
+#define FILE_NOT_FOUND_CODE 2
+#define INVALID_DATA_CODE 3
 
-int main(int argc, char* argv[])
+int main(int argc, char** argv)
 {
     if ((argc == 1) || (argc > 3)) {
-        display_error(0);
+        display_error(WRONG_ARGS_CODE);
         return 0;
     }
     FILE* input;
     input = fopen(argv[1], "r");
     if (input == NULL) {
-        display_error(1);
+        display_error(FILE_NOT_FOUND_CODE);
         return 0;
     }
     size_t is_uint = 1;
     size_t size = check_file(input, &is_uint);
     if (size < 2) {
-        display_error(2);
+        display_error(INVALID_DATA_CODE);
         fclose(input);
         return 0;
     }
@@ -33,11 +36,6 @@ int main(int argc, char* argv[])
     }
     fclose(input);
     fclose(output);
-    printf("Data from %s is succesfully sorted and printed in ", argv[1]);
-    if (argc == 3) {
-        printf("%s\n", argv[2]);
-    } else {
-        printf("sort.txt\n");
-    }
+    display_succes(argc, argv);
     return 0;
 }

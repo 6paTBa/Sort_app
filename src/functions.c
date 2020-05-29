@@ -5,18 +5,31 @@
 #include <string.h>
 #define MAX_STR_LEN 50
 #define MAX_IS_SIZE 1000
+#define WRONG_ARGS_CODE 1
+#define FILE_NOT_FOUND_CODE 2
+#define INVALID_DATA_CODE 3
 
 void display_error(size_t code)
 {
     switch (code) {
-    case 0:
-        printf("Wrong number of arguments\n");
+    case WRONG_ARGS_CODE:
+        printf("Wrong number of arguments.\n");
         break;
-    case 1:
-        printf("Unable to read data - file not found\n");
+    case FILE_NOT_FOUND_CODE:
+        printf("Unable to read data - file not found.\n");
         break;
-    case 2:
-        printf("Unable to sort data - invalid or empty data\n");
+    case INVALID_DATA_CODE:
+        printf("Unable to sort data - invalid or too short data.\n");
+    }
+}
+
+void display_succes(int argc, char** argv)
+{
+    printf("Data from '%s' is succesfully sorted and printed in ", argv[1]);
+    if (argc == 3) {
+        printf("'%s'.\n", argv[2]);
+    } else {
+        printf("'sort.txt'.\n");
     }
 }
 
