@@ -48,8 +48,7 @@ size_t check_string(char* str, size_t* is_uint)
         return 0;
     }
     for (size_t i = 0; str[i] != '\n'; i++) {
-        size_t cur = check_uint(str, i, &point);
-        switch (cur) {
+        switch (check_uint(str, i, &point)) {
         case 0:
             return 0;
         case 1:
