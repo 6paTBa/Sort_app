@@ -5,6 +5,68 @@
 #include <string.h>
 #define MAX_STR_LEN 50
 #define MAX_IS_SIZE 1000
+#define WRONG_ARGS_CODE 1
+#define FILE_NOT_FOUND_CODE 2
+#define INVALID_DATA_CODE 3
+
+void display_error(size_t code)
+{
+    switch (code) {
+    case WRONG_ARGS_CODE:
+        printf("Wrong number of arguments.\n");
+        break;
+    case FILE_NOT_FOUND_CODE:
+        printf("Unable to read data - file not found.\n");
+        break;
+    case INVALID_DATA_CODE:
+        printf("Unable to sort data - invalid or too short data.\n");
+    }
+}
+
+void display_succes(int argc, char** argv)
+{
+    printf("Data from '%s' is succesfully sorted and printed in ", argv[1]);
+    if (argc == 3) {
+        printf("'%s'.\n", argv[2]);
+    } else {
+        printf("'sort.txt'.\n");
+    }
+}
+
+size_t check_uint(char* str, size_t i, size_t* point)
+{
+    if ((i == 0) && (str[i] == '-')) {
+        return 1;
+    }
+    if ((i != 0) && (str[i] == '.') && (*point == 0)) {
+        if ((str[i - 1] == '-') || (str[i + 1] == '\n')) {
+            return 0;
+        }
+        *point = 1;
+        return 1;
+    }
+    return 2;
+}
+
+size_t check_null(char* str, size_t i)
+{
+    if (str[i] == '0') {
+        if (i == 0) {
+            if ((str[i + 1] != '.') && (str[i + 1] != '\n')) {
+                return 0;
+            }
+        } else if ((str[i - 1] == '-') && (str[i + 1] != '.')) {
+            return 0;
+        } else if (str[i + 1] == '.') {
+            for (size_t j = 2; str[i + j] == '0'; j++) {
+                if (str[i + j + 1] == '\n') {
+                    return 0;
+                }
+            }
+        }
+    }
+    return 1;
+}
 
 size_t check_string(char* str, size_t* is_uint)
 {
@@ -13,31 +75,19 @@ size_t check_string(char* str, size_t* is_uint)
         return 0;
     }
     for (size_t i = 0; str[i] != '\n'; i++) {
-        if ((i == 0) && (str[i] == '-')) {
-            *is_uint = 0;
-        } else if ((i != 0) && (str[i] == '.') && (point == 0)) {
-            if ((str[i - 1] == '-') || (str[i + 1] == '\n')) {
-                return 0;
-            }
-            point = 1;
-            *is_uint = 0;
-        } else if (!isdigit(str[i])) {
+        switch (check_uint(str, i, &point)) {
+        case 0:
             return 0;
-        }
-        if (str[i] == '0') {
-            if (i == 0) {
-                if ((str[i + 1] != '.') && (str[i + 1] != '\n')) {
-                    return 0;
-                }
-            } else if ((str[i - 1] == '-') && (str[i + 1] != '.')) {
+        case 1:
+            *is_uint = 0;
+            break;
+        case 2:
+            if (!isdigit(str[i])) {
                 return 0;
-            } else if (str[i + 1] == '.') {
-                for (size_t j = 2; str[i + j] == '0'; j++) {
-                    if (str[i + j + 1] == '\n') {
-                        return 0;
-                    }
-                }
             }
+        }
+        if (check_null(str, i) != 1) {
+            return 0;
         }
     }
     return 1;
