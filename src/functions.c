@@ -6,6 +6,20 @@
 #define MAX_STR_LEN 50
 #define MAX_IS_SIZE 1000
 
+void display_error(size_t code)
+{
+    switch (code) {
+    case 0:
+        printf("Wrong number of arguments\n");
+        break;
+    case 1:
+        printf("Unable to read data - file not found\n");
+        break;
+    case 2:
+        printf("Unable to sort data - invalid or empty data\n");
+    }
+}
+
 size_t check_uint(char* str, size_t i, size_t* point)
 {
     if ((i == 0) && (str[i] == '-')) {

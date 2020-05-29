@@ -3,19 +3,19 @@
 int main(int argc, char* argv[])
 {
     if ((argc == 1) || (argc > 3)) {
-        printf("Wrong number of arguments\n");
+        display_error(0);
         return 0;
     }
     FILE* input;
     input = fopen(argv[1], "r");
     if (input == NULL) {
-        printf("Unable to read data - file not found\n");
+        display_error(1);
         return 0;
     }
     size_t is_uint = 1;
     size_t size = check_file(input, &is_uint);
     if (size < 2) {
-        printf("Unable to sort data - invalid or empty data\n");
+        display_error(2);
         fclose(input);
         return 0;
     }
