@@ -5,6 +5,8 @@
 
 size_t check_uint(char* str, size_t i, size_t* point);
 
+size_t check_null(char* str, size_t i);
+
 size_t check_file(FILE* input, size_t* is_uint);
 
 size_t check_string(char* str, size_t* is_uint);
