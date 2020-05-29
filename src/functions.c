@@ -6,6 +6,21 @@
 #define MAX_STR_LEN 50
 #define MAX_IS_SIZE 1000
 
+size_t check_uint(char* str, size_t i, size_t* point)
+{
+    if ((i == 0) && (str[i] == '-')) {
+        return 1;
+    }
+    if ((i != 0) && (str[i] == '.') && (*point == 0)) {
+        if ((str[i - 1] == '-') || (str[i + 1] == '\n')) {
+            return 0;
+        }
+        *point = 1;
+        return 1;
+    }
+    return 2;
+}
+
 size_t check_string(char* str, size_t* is_uint)
 {
     size_t point = 0;
@@ -13,16 +28,17 @@ size_t check_string(char* str, size_t* is_uint)
         return 0;
     }
     for (size_t i = 0; str[i] != '\n'; i++) {
-        if ((i == 0) && (str[i] == '-')) {
+        size_t cur = check_uint(str, i, &point);
+        switch (cur) {
+        case 0:
+            return 0;
+        case 1:
             *is_uint = 0;
-        } else if ((i != 0) && (str[i] == '.') && (point == 0)) {
-            if ((str[i - 1] == '-') || (str[i + 1] == '\n')) {
+            break;
+        case 2:
+            if (!isdigit(str[i])) {
                 return 0;
             }
-            point = 1;
-            *is_uint = 0;
-        } else if (!isdigit(str[i])) {
-            return 0;
         }
         if (str[i] == '0') {
             if (i == 0) {

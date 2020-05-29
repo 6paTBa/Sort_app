@@ -3,6 +3,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+size_t check_uint(char* str, size_t i, size_t* point);
+
 size_t check_file(FILE* input, size_t* is_uint);
 
 size_t check_string(char* str, size_t* is_uint);
