@@ -1,7 +1,8 @@
 #include "functions.h"
 #define WRONG_ARGS_CODE 1
 #define FILE_NOT_FOUND_CODE 2
-#define INVALID_DATA_CODE 3
+#define SIMILAR_ARGS_CODE 3
+#define INVALID_DATA_CODE 4
 
 int main(int argc, char** argv)
 {
@@ -14,6 +15,12 @@ int main(int argc, char** argv)
     if (input == NULL) {
         display_error(FILE_NOT_FOUND_CODE);
         return 0;
+    }
+    if (argc == 3) {
+        if (strcmp(argv[1], argv[2]) == 0) {
+            display_error(SIMILAR_ARGS_CODE);
+            return 0;
+        }
     }
     size_t is_uint = 1;
     size_t size = check_file(input, &is_uint);

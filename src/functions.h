@@ -2,6 +2,7 @@
 #define H_FUNCTIONS
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 void display_error(size_t code);
 

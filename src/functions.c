@@ -7,7 +7,8 @@
 #define MAX_IS_SIZE 1000
 #define WRONG_ARGS_CODE 1
 #define FILE_NOT_FOUND_CODE 2
-#define INVALID_DATA_CODE 3
+#define SIMILAR_ARGS_CODE 3
+#define INVALID_DATA_CODE 4
 
 void display_error(size_t code)
 {
@@ -17,6 +18,9 @@ void display_error(size_t code)
         break;
     case FILE_NOT_FOUND_CODE:
         printf("Unable to read data - file not found.\n");
+        break;
+    case SIMILAR_ARGS_CODE:
+        printf("Unable to sort data - input and output files are similar.\n");
         break;
     case INVALID_DATA_CODE:
         printf("Unable to sort data - invalid or too short data.\n");
